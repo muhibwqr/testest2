@@ -7,7 +7,7 @@ import Variant3 from "./variants/variant-3";
 import Variant4 from "./variants/variant-4";
 
 const VARIANTS = [Variant1, Variant2, Variant3, Variant4];
-const REPO_FULL_NAME = 'muhibwqr/testerrepo';
+const REPO_FULL_NAME = 'muhibwqr/testerpage';
 const LAYER = 'layer-1';
 const BEACON_URL = 'http://localhost:8000';
 const POOL_KEY = "landright_variant_pool";
