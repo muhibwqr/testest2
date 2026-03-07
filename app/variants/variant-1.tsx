@@ -1,360 +1,594 @@
 "use client";
 
-import { Bebas_Neue, Manrope } from 'next/font/google';
+import { Bebas_Neue, Manrope } from "next/font/google";
 
-const bebas = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-bebas' });
-const manrope = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-manrope' });
+const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-bebas" });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
-export default function MuhibVariant1() {
+export default function Page() {
   return (
-    <div className={`${bebas.variable} ${manrope.variable} min-h-screen bg-[#0A0A0A] text-[#F5F5F0] relative overflow-x-hidden`}>
+    <div
+      className={`${bebas.variable} ${manrope.variable} min-h-screen relative overflow-hidden`}
+      style={{
+        backgroundColor: "#0A0A0B",
+        fontFamily: "var(--font-manrope), sans-serif",
+      }}
+    >
       {/* Grain overlay */}
       <div
-        className="pointer-events-none fixed inset-0 z-50"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+          position: "fixed",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")",
           opacity: 0.04,
-          mixBlendMode: 'overlay',
         }}
       />
 
-      {/* Background gradient */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#111111] to-[#1A1A1A] -z-10" />
+      {/* Radial spotlight */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "900px",
+          height: "700px",
+          background:
+            "radial-gradient(ellipse at center, rgba(232,41,28,0.18) 0%, rgba(232,41,28,0.06) 35%, transparent 70%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
 
-      {/* NAV */}
-      <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 lg:px-16 py-6">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-[#E8202A] flex items-center justify-center rounded-sm">
-            <span className="font-bebas text-white text-lg leading-none" style={{ fontFamily: 'var(--font-bebas)' }}>M</span>
-          </div>
-          <span className="font-bebas text-[#F5F5F0] text-2xl tracking-widest" style={{ fontFamily: 'var(--font-bebas)' }}>MUHIB</span>
-        </div>
-        <a
-          href="https://win.co"
-          className="bg-[#E8202A] hover:bg-[#c41a22] transition-colors duration-200 text-white font-semibold text-sm px-6 py-2.5 rounded-full"
-          style={{ fontFamily: 'var(--font-manrope)' }}
+      {/* Content */}
+      <div style={{ position: "relative", zIndex: 2 }}>
+        {/* NAV */}
+        <nav
+          style={{
+            borderBottom: "1px solid #1E1E24",
+            backgroundColor: "rgba(10,10,11,0.85)",
+            backdropFilter: "blur(12px)",
+          }}
+          className="sticky top-0"
         >
-          Get started
-        </a>
-      </nav>
-
-      {/* HERO */}
-      <section className="relative z-10 px-6 md:px-12 lg:px-16 pt-10 md:pt-16 pb-20 md:pb-28">
-        {/* Diagonal red slash */}
-        <div
-          className="absolute left-0 top-0 w-full h-full pointer-events-none overflow-hidden"
-          aria-hidden="true"
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: '10%',
-              left: '-5%',
-              width: '55%',
-              height: '6px',
-              background: '#E8202A',
-              transform: 'rotate(-8deg)',
-              opacity: 0.85,
-              borderRadius: '2px',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              top: 'calc(10% + 18px)',
-              left: '-5%',
-              width: '40%',
-              height: '2px',
-              background: '#E8202A',
-              transform: 'rotate(-8deg)',
-              opacity: 0.3,
-              borderRadius: '2px',
-            }}
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-8">
-          {/* Left: Headline + CTA */}
-          <div className="flex-1 relative">
-            <div className="mb-3">
-              <span
-                className="text-[#E8202A] text-xs font-semibold tracking-[0.25em] uppercase"
-                style={{ fontFamily: 'var(--font-manrope)' }}
-              >
-                Sales Infrastructure
-              </span>
-            </div>
-            <h1
-              className="font-bebas leading-none tracking-wide text-[#F5F5F0]"
-              style={{
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(72px, 12vw, 160px)',
-                lineHeight: 0.92,
-              }}
-            >
-              WE BUILD
-              <br />
-              <span className="text-[#E8202A]">PIPELINES</span>
-              <br />
-              THAT CONVERT
-            </h1>
-
-            <p
-              className="mt-8 text-[#8A8A8A] text-base md:text-lg leading-relaxed max-w-xl"
-              style={{ fontFamily: 'var(--font-manrope)' }}
-            >
-              Muhib engineers end-to-end sales systems — from cold outreach to closed deals — so your team stops guessing and starts winning.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <a
-                href="https://win.co"
-                className="inline-flex items-center gap-2 bg-[#E8202A] hover:bg-[#c41a22] active:scale-95 transition-all duration-200 text-white font-bold text-base px-8 py-4 rounded-full shadow-lg shadow-red-900/30"
-                style={{ fontFamily: 'var(--font-manrope)' }}
-              >
-                Get started
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <span className="text-[#8A8A8A] text-sm" style={{ fontFamily: 'var(--font-manrope)' }}>No retainers. No guesswork.</span>
-            </div>
-          </div>
-
-          {/* Right: Floating pipeline card */}
-          <div className="flex-shrink-0 lg:w-[420px] flex flex-col gap-4">
-            {/* Main metric card */}
-            <div
-              className="rounded-2xl p-6 relative overflow-hidden"
-              style={{
-                background: '#161616',
-                border: '1px solid #2a2a2a',
-                boxShadow: '0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,32,42,0.08)',
-                borderLeft: '3px solid #E8202A',
-              }}
-            >
-              <div className="flex items-center justify-between mb-5">
-                <span className="text-[#8A8A8A] text-xs font-semibold tracking-widest uppercase" style={{ fontFamily: 'var(--font-manrope)' }}>Pipeline Overview</span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#E8202A] animate-pulse" />
-                  <span className="text-[#E8202A] text-xs font-semibold" style={{ fontFamily: 'var(--font-manrope)' }}>Live</span>
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-5">
-                <div>
-                  <div className="font-bebas text-5xl text-[#F5F5F0] leading-none" style={{ fontFamily: 'var(--font-bebas)' }}>47</div>
-                  <div className="text-[#8A8A8A] text-xs mt-1" style={{ fontFamily: 'var(--font-manrope)' }}>Deals closed this month</div>
-                </div>
-                <div>
-                  <div className="font-bebas text-5xl text-[#E8202A] leading-none" style={{ fontFamily: 'var(--font-bebas)' }}>$2.3M</div>
-                  <div className="text-[#8A8A8A] text-xs mt-1" style={{ fontFamily: 'var(--font-manrope)' }}>Pipeline value</div>
-                </div>
-              </div>
-              {/* Mini bar chart */}
-              <div className="flex items-end gap-1.5 h-12">
-                {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 75, 100].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm"
-                    style={{
-                      height: `${h}%`,
-                      background: i === 11 ? '#E8202A' : i > 8 ? 'rgba(232,32,42,0.4)' : '#2a2a2a',
-                      transition: 'height 0.3s ease',
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="mt-3 flex items-center justify-between">
-                <span className="text-[#8A8A8A] text-xs" style={{ fontFamily: 'var(--font-manrope)' }}>Last 12 weeks</span>
-                <span className="text-[#E8202A] text-xs font-semibold" style={{ fontFamily: 'var(--font-manrope)' }}>↑ 34% vs prior period</span>
-              </div>
-            </div>
-
-            {/* Secondary cards row */}
-            <div className="grid grid-cols-2 gap-4">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
               <div
-                className="rounded-xl p-4"
-                style={{ background: '#161616', border: '1px solid #2a2a2a' }}
-              >
-                <div className="font-bebas text-3xl text-[#F5F5F0]" style={{ fontFamily: 'var(--font-bebas)' }}>312</div>
-                <div className="text-[#8A8A8A] text-xs mt-0.5" style={{ fontFamily: 'var(--font-manrope)' }}>Qualified leads</div>
-                <div className="text-[#E8202A] text-xs font-semibold mt-1" style={{ fontFamily: 'var(--font-manrope)' }}>↑ 18%</div>
-              </div>
-              <div
-                className="rounded-xl p-4"
-                style={{ background: '#161616', border: '1px solid #2a2a2a' }}
-              >
-                <div className="font-bebas text-3xl text-[#F5F5F0]" style={{ fontFamily: 'var(--font-bebas)' }}>68%</div>
-                <div className="text-[#8A8A8A] text-xs mt-0.5" style={{ fontFamily: 'var(--font-manrope)' }}>Call show rate</div>
-                <div className="text-[#E8202A] text-xs font-semibold mt-1" style={{ fontFamily: 'var(--font-manrope)' }}>↑ 12%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LOGO STRIP / SOCIAL PROOF */}
-      <section className="relative z-10 border-t border-[#1E1E1E] py-10 px-6 md:px-12 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-[#8A8A8A] text-xs tracking-[0.2em] uppercase mb-8" style={{ fontFamily: 'var(--font-manrope)' }}>Trusted by growth-stage teams</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {['Acme Corp', 'Vertex AI', 'Northstar', 'Cascade', 'Luminary'].map((name) => (
-              <span
-                key={name}
-                className="text-[#2E2E2E] font-bold text-lg tracking-widest uppercase"
-                style={{ fontFamily: 'var(--font-bebas)', letterSpacing: '0.15em' }}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="relative z-10 px-6 md:px-12 lg:px-16 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-2 items-start md:items-center mb-16">
-            <div className="h-px flex-1 bg-gradient-to-r from-[#E8202A] to-transparent" />
-            <span className="font-bebas text-[#E8202A] text-sm tracking-[0.3em] px-4" style={{ fontFamily: 'var(--font-bebas)' }}>HOW IT WORKS</span>
-            <div className="h-px flex-1 bg-gradient-to-l from-[#E8202A] to-transparent" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                num: '01',
-                title: 'Niche-Targeted Prospecting',
-                body: 'Puts you in front of buyers who are ready — not random lists that waste your team\'s time.',
-              },
-              {
-                num: '02',
-                title: 'Conversion-Engineered Sequences',
-                body: 'Turn cold leads into booked calls with messaging built around psychology, not templates.',
-              },
-              {
-                num: '03',
-                title: 'Pipeline Infrastructure',
-                body: 'Built to scale without adding headcount — systems that compound as your business grows.',
-              },
-            ].map((item) => (
-              <div
-                key={item.num}
-                className="rounded-2xl p-8 group hover:border-[#E8202A] transition-colors duration-300"
                 style={{
-                  background: '#161616',
-                  border: '1px solid #2a2a2a',
+                  width: 28,
+                  height: 28,
+                  background: "#E8291C",
+                  borderRadius: 6,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <div
-                  className="font-bebas text-6xl leading-none mb-6 group-hover:text-[#E8202A] transition-colors duration-300"
-                  style={{ fontFamily: 'var(--font-bebas)', color: '#2a2a2a' }}
-                >
-                  {item.num}
-                </div>
-                <h3
-                  className="font-bebas text-2xl text-[#F5F5F0] mb-3 tracking-wide"
-                  style={{ fontFamily: 'var(--font-bebas)' }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-[#8A8A8A] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-manrope)' }}>
-                  {item.body}
-                </p>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7L6 11L12 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <span
+                style={{
+                  color: "#F5F5F0",
+                  fontFamily: "var(--font-manrope)",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                muhibs busoness
+              </span>
+            </div>
 
-      {/* CTA BANNER */}
-      <section className="relative z-10 px-6 md:px-12 lg:px-16 pb-20 md:pb-28">
-        <div className="max-w-7xl mx-auto">
+            {/* Nav right */}
+            <div className="flex items-center gap-4">
+              <span
+                style={{
+                  color: "#6B6B72",
+                  fontSize: 13,
+                  fontFamily: "var(--font-manrope)",
+                }}
+                className="hidden sm:inline"
+              >
+                For Enterprise
+              </span>
+              <span
+                style={{
+                  color: "#6B6B72",
+                  fontSize: 13,
+                  fontFamily: "var(--font-manrope)",
+                }}
+                className="hidden sm:inline"
+              >
+                API
+              </span>
+              <span
+                style={{
+                  color: "#F5F5F0",
+                  fontSize: 13,
+                  fontFamily: "var(--font-manrope)",
+                }}
+                className="hidden sm:inline"
+              >
+                Sign In
+              </span>
+              <a
+                href="https://whop.com"
+                style={{
+                  backgroundColor: "#E8291C",
+                  color: "#F5F5F0",
+                  fontFamily: "var(--font-manrope)",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  padding: "7px 16px",
+                  borderRadius: 8,
+                  textDecoration: "none",
+                  letterSpacing: "0.01em",
+                  transition: "background 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#c92216")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#E8291C")}
+              >
+                Get started
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        {/* HERO */}
+        <section className="flex flex-col items-center text-center px-4 sm:px-6 pt-16 pb-10 sm:pt-24 sm:pb-14">
+          {/* Toggle pill */}
           <div
-            className="rounded-2xl px-8 md:px-16 py-14 md:py-20 relative overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, #1A0A0A 0%, #1A1A1A 100%)',
-              border: '1px solid #2a2a2a',
+              display: "inline-flex",
+              backgroundColor: "#111114",
+              border: "1px solid #1E1E24",
+              borderRadius: 999,
+              padding: "4px",
+              marginBottom: 40,
+              gap: 2,
             }}
           >
-            {/* Decorative diagonal */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              aria-hidden="true"
+            <span
+              style={{
+                fontFamily: "var(--font-manrope)",
+                fontSize: 13,
+                fontWeight: 600,
+                color: "#F5F5F0",
+                backgroundColor: "#1E1E24",
+                borderRadius: 999,
+                padding: "5px 18px",
+              }}
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '-20px',
-                  right: '-20px',
-                  width: '300px',
-                  height: '300px',
-                  background: 'radial-gradient(circle, rgba(232,32,42,0.12) 0%, transparent 70%)',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '30%',
-                  right: '10%',
-                  width: '200px',
-                  height: '3px',
-                  background: '#E8202A',
-                  transform: 'rotate(-8deg)',
-                  opacity: 0.6,
-                  borderRadius: '2px',
-                }}
-              />
-            </div>
+              Launch
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-manrope)",
+                fontSize: 13,
+                fontWeight: 500,
+                color: "#6B6B72",
+                padding: "5px 18px",
+              }}
+            >
+              Discover
+            </span>
+          </div>
 
-            <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-              <div className="max-w-xl">
-                <h2
-                  className="font-bebas leading-none text-[#F5F5F0] mb-4"
+          {/* Headline */}
+          <h1
+            style={{
+              fontFamily: "var(--font-bebas)",
+              color: "#F5F5F0",
+              lineHeight: 0.92,
+              letterSpacing: "0.02em",
+              marginBottom: 24,
+              maxWidth: 760,
+            }}
+            className="text-6xl sm:text-8xl md:text-[108px] lg:text-[128px]"
+          >
+            Where Data
+            <br />
+            <span style={{ color: "#E8291C" }}>Meets</span> Design.
+          </h1>
+
+          {/* Subhead */}
+          <p
+            style={{
+              fontFamily: "var(--font-manrope)",
+              color: "#6B6B72",
+              maxWidth: 520,
+              lineHeight: 1.65,
+              marginBottom: 40,
+            }}
+            className="text-sm sm:text-base md:text-lg"
+          >
+            Landing pages that learn from every click — built fast, refined by real performance data, and deployed before your competition catches up.
+          </p>
+
+          {/* Prompt / CTA box */}
+          <div
+            style={{
+              width: "100%",
+              maxWidth: 580,
+              backgroundColor: "#111114",
+              border: "1px solid #1E1E24",
+              borderRadius: 16,
+              padding: "20px 20px 16px 20px",
+              boxShadow: "0 0 0 1px rgba(232,41,28,0.08), 0 8px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03)",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-manrope)",
+                color: "#6B6B72",
+                fontSize: 15,
+                textAlign: "left",
+                marginBottom: 16,
+                lineHeight: 1.5,
+              }}
+            >
+              Build a high-converting landing page for my SaaS...
+            </p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div
                   style={{
-                    fontFamily: 'var(--font-bebas)',
-                    fontSize: 'clamp(40px, 6vw, 80px)',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 8,
+                    border: "1px solid #1E1E24",
+                    backgroundColor: "#0A0A0B",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  READY TO STOP
-                  <br />
-                  <span className="text-[#E8202A]">LEAVING DEALS</span>
-                  <br />
-                  ON THE TABLE?
-                </h2>
-                <p className="text-[#8A8A8A] text-base" style={{ fontFamily: 'var(--font-manrope)' }}>
-                  Let's build a pipeline that actually closes.
-                </p>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M6 1v10M1 6h10" stroke="#6B6B72" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <span style={{ color: "#6B6B72", fontSize: 12, fontFamily: "var(--font-manrope)" }}>Attach brief</span>
               </div>
-              <a
-                href="https://win.co"
-                className="flex-shrink-0 inline-flex items-center gap-2 bg-[#E8202A] hover:bg-[#c41a22] active:scale-95 transition-all duration-200 text-white font-bold text-base px-10 py-5 rounded-full shadow-xl shadow-red-900/40"
-                style={{ fontFamily: 'var(--font-manrope)' }}
-              >
-                Get started
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
+              <div className="flex items-center gap-2">
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 8,
+                    border: "1px solid #1E1E24",
+                    backgroundColor: "#0A0A0B",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 2.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="#6B6B72" />
+                  </svg>
+                </div>
+                <a
+                  href="https://whop.com"
+                  style={{
+                    backgroundColor: "#E8291C",
+                    color: "#F5F5F0",
+                    fontFamily: "var(--font-manrope)",
+                    fontWeight: 700,
+                    fontSize: 13,
+                    padding: "7px 18px",
+                    borderRadius: 8,
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    transition: "background 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#c92216")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#E8291C")}
+                >
+                  Get started
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8M6 2l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* FOOTER */}
-      <footer className="relative z-10 border-t border-[#1E1E1E] px-6 md:px-12 lg:px-16 py-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-[#E8202A] flex items-center justify-center rounded-sm">
-              <span className="font-bebas text-white text-sm leading-none" style={{ fontFamily: 'var(--font-bebas)' }}>M</span>
-            </div>
-            <span className="font-bebas text-[#F5F5F0] text-xl tracking-widest" style={{ fontFamily: 'var(--font-bebas)' }}>MUHIB</span>
+          {/* Stats bar */}
+          <div
+            className="flex flex-col sm:flex-row items-center gap-3 sm:gap-0 mt-10"
+            style={{
+              fontFamily: "var(--font-manrope)",
+            }}
+          >
+            {[
+              { num: "$2.8M+", label: "revenue generated" },
+              { num: "22,000+", label: "users served" },
+              { num: "2,400+", label: "pages launched" },
+            ].map((stat, i) => (
+              <>
+                <div key={stat.num} className="flex items-center gap-2">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-bebas)",
+                      color: "#F5F5F0",
+                      fontSize: 20,
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    {stat.num}
+                  </span>
+                  <span style={{ color: "#6B6B72", fontSize: 13 }}>{stat.label}</span>
+                </div>
+                {i < 2 && (
+                  <span
+                    key={`sep-${i}`}
+                    style={{ color: "#1E1E24", margin: "0 16px", fontSize: 18 }}
+                    className="hidden sm:inline"
+                  >
+                    ·
+                  </span>
+                )}
+              </>
+            ))}
           </div>
-          <p className="text-[#8A8A8A] text-xs" style={{ fontFamily: 'var(--font-manrope)' }}>
-            © {new Date().getFullYear()} Muhib. All rights reserved.
-          </p>
-        </div>
-      </footer>
+        </section>
+
+        {/* GETTING STARTED SECTION */}
+        <section
+          style={{
+            borderTop: "1px solid #1E1E24",
+            padding: "64px 0",
+          }}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <p
+              style={{
+                fontFamily: "var(--font-manrope)",
+                color: "#6B6B72",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 32,
+              }}
+            >
+              Getting started
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  icon: "⚡",
+                  title: "Launch in hours",
+                  desc: "Production-ready pages from day one — no waiting, no bloat.",
+                },
+                {
+                  icon: "📊",
+                  title: "Data-backed design",
+                  desc: "Every layout decision is informed by live conversion metrics.",
+                },
+                {
+                  icon: "🔁",
+                  title: "Continuous iteration",
+                  desc: "Results compound over time as pages learn and improve.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  style={{
+                    backgroundColor: "#111114",
+                    border: "1px solid #1E1E24",
+                    borderRadius: 12,
+                    padding: "24px",
+                    transition: "border-color 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(232,41,28,0.3)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1E1E24")}
+                >
+                  <div style={{ fontSize: 24, marginBottom: 12 }}>{item.icon}</div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-manrope)",
+                      color: "#F5F5F0",
+                      fontWeight: 700,
+                      fontSize: 15,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-manrope)",
+                      color: "#6B6B72",
+                      fontSize: 13,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA SECTION */}
+        <section
+          style={{
+            borderTop: "1px solid #1E1E24",
+            padding: "80px 0",
+            textAlign: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-20%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "600px",
+              height: "400px",
+              background:
+                "radial-gradient(ellipse at center, rgba(232,41,28,0.12) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+          <div className="max-w-2xl mx-auto px-4 sm:px-6" style={{ position: "relative" }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-bebas)",
+                color: "#F5F5F0",
+                fontSize: 64,
+                letterSpacing: "0.03em",
+                lineHeight: 0.95,
+                marginBottom: 16,
+              }}
+              className="text-5xl sm:text-6xl md:text-7xl"
+            >
+              Build smarter.
+              <br />
+              <span style={{ color: "#E8291C" }}>Convert faster.</span>
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-manrope)",
+                color: "#6B6B72",
+                fontSize: 15,
+                lineHeight: 1.65,
+                marginBottom: 32,
+              }}
+            >
+              Join thousands of founders who ship landing pages that actually convert.
+            </p>
+            <a
+              href="https://whop.com"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                backgroundColor: "#E8291C",
+                color: "#F5F5F0",
+                fontFamily: "var(--font-manrope)",
+                fontWeight: 700,
+                fontSize: 15,
+                padding: "14px 32px",
+                borderRadius: 10,
+                textDecoration: "none",
+                transition: "background 0.2s, transform 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#c92216";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#E8291C";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Get started
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer
+          style={{
+            borderTop: "1px solid #1E1E24",
+            padding: "28px 0",
+          }}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  background: "#E8291C",
+                  borderRadius: 5,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7L6 11L12 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <span
+                style={{
+                  color: "#6B6B72",
+                  fontFamily: "var(--font-manrope)",
+                  fontSize: 13,
+                  fontWeight: 600,
+                }}
+              >
+                muhibs busoness
+              </span>
+            </div>
+            <div className="flex items-center gap-5 flex-wrap justify-center">
+              {["How it works", "Mission", "Press", "Brand", "Privacy", "Terms", "Status"].map((item) => (
+                <span
+                  key={item}
+                  style={{
+                    color: "#6B6B72",
+                    fontFamily: "var(--font-manrope)",
+                    fontSize: 12,
+                    cursor: "default",
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              {[
+                {
+                  label: "YouTube",
+                  path: "M10 7L6 4.5v5L10 7zm-8 5V2h12v10H2z",
+                },
+                {
+                  label: "X",
+                  path: "M2 2l10 10M12 2L2 12",
+                },
+                {
+                  label: "Instagram",
+                  path: "M3 3h8v8H3zM9 7a2 2 0 11-4 0 2 2 0 014 0z",
+                },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 7,
+                    border: "1px solid #1E1E24",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "default",
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                    <path d={s.path} stroke="#6B6B72" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                </div>
+              ))}
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
