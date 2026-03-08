@@ -1,265 +1,392 @@
 "use client";
 
-import { Bebas_Neue, Manrope } from 'next/font/google';
+import { Abril_Fatface, Karla } from 'next/font/google';
 
-const bebas = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-bebas' });
-const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
+const abril = Abril_Fatface({ subsets: ['latin'], weight: '400' });
+const karla = Karla({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
 export default function Page() {
   return (
-    <main className={`${bebas.variable} ${manrope.variable} min-h-screen bg-[#0A0A0B] text-[#F5F5F0] relative overflow-x-hidden`}>
-      {/* Grain overlay */}
-      <div
-        aria-hidden
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          opacity: 0.04,
-        }}
-      />
+    <div className={`${karla.className} min-h-screen bg-[#F7F3EE] overflow-x-hidden`}>
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        @keyframes grow {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
+        @keyframes barUp {
+          0% { height: 0%; }
+          100% { height: var(--h); }
+        }
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateX(-20px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .bar-animate {
+          animation: barUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: var(--delay);
+          height: 0%;
+        }
+        .float-card {
+          animation: float 6s ease-in-out infinite;
+        }
+        .slide-in {
+          animation: slideIn 0.6s ease forwards;
+        }
+        .marquee-track {
+          display: flex;
+          gap: 3rem;
+          animation: marquee 20s linear infinite;
+          white-space: nowrap;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .noise-overlay::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 9999;
+          opacity: 0.5;
+        }
+        .diagonal-stripe {
+          background: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 8px,
+            rgba(200, 80, 30, 0.06) 8px,
+            rgba(200, 80, 30, 0.06) 9px
+          );
+        }
+        .text-stroke {
+          -webkit-text-stroke: 2px #2A1A0E;
+          color: transparent;
+        }
+        .hover-lift {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+      `}</style>
 
-      {/* Radial spotlight */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '900px',
-          height: '700px',
-          background: 'radial-gradient(ellipse at center, rgba(232,41,28,0.18) 0%, rgba(232,41,28,0.06) 35%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
+      <div className="noise-overlay" />
 
       {/* NAV */}
-      <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 border-b border-[#1E1E24]">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-sm bg-[#E8291C] flex items-center justify-center">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 7L6 11L12 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F7F3EE]/90 backdrop-blur-sm border-b border-[#E8E0D5]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#C8401E] rounded-sm flex items-center justify-center">
+              <span className="text-white font-bold text-sm">mw</span>
+            </div>
+            <span className="font-semibold text-[#2A1A0E] text-sm tracking-wide">muhib waaqar</span>
           </div>
-          <span className="font-[family-name:var(--font-manrope)] font-bold text-[#F5F5F0] text-base tracking-tight">muhibs busoness</span>
+          <a
+            href="https://muhibwaqar.com"
+            className="bg-[#C8401E] text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#A83318] transition-colors duration-200"
+          >
+            Get started
+          </a>
         </div>
-        <div className="hidden md:flex items-center gap-8">
-          <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">For Enterprise</span>
-          <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">API</span>
-          <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">Sign In</span>
-        </div>
-        <a
-          href="https://whop.com"
-          className="font-[family-name:var(--font-manrope)] font-semibold text-sm bg-[#E8291C] hover:bg-[#c9221a] text-white px-5 py-2.5 rounded-lg transition-all duration-200 shadow-[0_0_20px_rgba(232,41,28,0.3)]"
-        >
-          Get started
-        </a>
       </nav>
 
       {/* HERO */}
-      <section className="relative z-10 flex flex-col items-center text-center px-6 pt-16 pb-12 md:pt-24 md:pb-16">
-        {/* Toggle pill */}
-        <div className="inline-flex items-center gap-1 bg-[#111114] border border-[#1E1E24] rounded-full px-1.5 py-1.5 mb-10">
-          <span className="font-[family-name:var(--font-manrope)] text-sm font-semibold bg-[#F5F5F0] text-[#0A0A0B] px-4 py-1.5 rounded-full">Launch</span>
-          <span className="font-[family-name:var(--font-manrope)] text-sm font-medium text-[#6B6B72] px-4 py-1.5">Discover</span>
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="font-[family-name:var(--font-bebas)] leading-none tracking-wide text-[#F5F5F0] mb-6"
-          style={{ fontSize: 'clamp(64px, 12vw, 140px)', lineHeight: '0.95' }}
-        >
-          Where Data<br />Meets Design.
-        </h1>
-
-        {/* Subhead */}
-        <p className="font-[family-name:var(--font-manrope)] text-[#6B6B72] text-base md:text-lg max-w-xl leading-relaxed mb-10">
-          Landing pages that learn from every click — built fast, refined by real performance data, and deployed before your competition catches up.
-        </p>
-
-        {/* Prompt / CTA box */}
-        <div
-          className="w-full max-w-2xl bg-[#111114] border border-[#1E1E24] rounded-2xl p-4 md:p-5 shadow-[0_0_40px_rgba(0,0,0,0.6)]"
-          style={{ boxShadow: '0 0 0 1px #1E1E24, 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)' }}
-        >
-          <p className="font-[family-name:var(--font-manrope)] text-[#6B6B72] text-sm md:text-base text-left mb-4 px-1">
-            Build a high-converting landing page...
-          </p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <button className="w-8 h-8 rounded-lg bg-[#1E1E24] flex items-center justify-center text-[#6B6B72] hover:text-[#F5F5F0] transition-colors">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
+      <section className="pt-32 pb-0 px-6 md:px-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 items-start">
+          {/* Left: Text */}
+          <div className="lg:pt-8">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 bg-[#2A1A0E] text-[#F7F3EE] text-xs font-semibold px-4 py-2 rounded-full mb-8 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 bg-[#C8401E] rounded-full" style={{animation: 'pulse-dot 2s ease-in-out infinite'}} />
+              Live iteration engine
             </div>
-            <div className="flex items-center gap-2">
-              <button className="w-8 h-8 rounded-lg bg-[#1E1E24] flex items-center justify-center text-[#6B6B72] hover:text-[#F5F5F0] transition-colors">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M7 1C3.686 1 1 3.686 1 7s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm0 2.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0 7.5a4.5 4.5 0 01-3.75-2.014C3.25 7.5 5.5 6.75 7 6.75s3.75.75 3.75 1.236A4.5 4.5 0 017 11z" fill="currentColor"/>
-                </svg>
-              </button>
+
+            <h1 className={`${abril.className} text-[52px] md:text-[68px] lg:text-[76px] leading-[0.95] text-[#2A1A0E] mb-8`}>
+              Landing Pages
+              <br />
+              <span className="text-stroke">That Learn</span>
+              <br />
+              From Every
+              <br />
+              <span className="text-[#C8401E]">Click.</span>
+            </h1>
+
+            <p className="text-[#6B5A4A] text-lg leading-relaxed mb-10 max-w-md">
+              Most landing pages are set-and-forget. Ours are living systems — continuously tested, refined by real data, and rebuilt to convert better every iteration.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
               <a
-                href="https://whop.com"
-                className="w-8 h-8 rounded-lg bg-[#E8291C] hover:bg-[#c9221a] flex items-center justify-center transition-all duration-200 shadow-[0_0_16px_rgba(232,41,28,0.4)]"
+                href="https://muhibwaqar.com"
+                className="bg-[#C8401E] text-white font-bold text-base px-8 py-4 rounded-full hover:bg-[#A83318] transition-all duration-200 hover:scale-105 inline-block"
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M7 2l5 5-5 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                Get started →
               </a>
+              <div className="flex items-center gap-3 py-4">
+                <div className="flex -space-x-2">
+                  {['#8B6F5E','#C8401E','#2A1A0E'].map((c, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-[#F7F3EE]" style={{background: c}} />
+                  ))}
+                </div>
+                <span className="text-sm text-[#6B5A4A]">Trusted by SaaS founders</span>
+              </div>
+            </div>
+
+            {/* Stats row */}
+            <div className="mt-12 pt-8 border-t border-[#E8E0D5] grid grid-cols-3 gap-6">
+              {[
+                { num: '340+', label: 'Iterations run' },
+                { num: '2.8×', label: 'Avg. lift' },
+                { num: '60+', label: 'Pages shipped' },
+              ].map((s, i) => (
+                <div key={i}>
+                  <div className={`${abril.className} text-3xl md:text-4xl text-[#2A1A0E]`}>{s.num}</div>
+                  <div className="text-xs text-[#8A7A6A] mt-1 uppercase tracking-wider">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Stats bar */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 mt-10 text-center">
-          <div className="flex items-center gap-2">
-            <span className="font-[family-name:var(--font-bebas)] text-2xl text-[#F5F5F0] tracking-wide">$2.8M+</span>
-            <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">revenue generated</span>
-          </div>
-          <div className="hidden sm:block w-px h-5 bg-[#1E1E24]" />
-          <div className="flex items-center gap-2">
-            <span className="font-[family-name:var(--font-bebas)] text-2xl text-[#F5F5F0] tracking-wide">22,000+</span>
-            <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">users served</span>
-          </div>
-          <div className="hidden sm:block w-px h-5 bg-[#1E1E24]" />
-          <div className="flex items-center gap-2">
-            <span className="font-[family-name:var(--font-bebas)] text-2xl text-[#F5F5F0] tracking-wide">2,400+</span>
-            <span className="font-[family-name:var(--font-manrope)] text-sm text-[#6B6B72]">pages launched</span>
+          {/* Right: Visual Stack */}
+          <div className="relative lg:pl-8">
+            {/* Main card */}
+            <div className="float-card bg-white rounded-2xl shadow-2xl shadow-[#2A1A0E]/10 p-6 border border-[#E8E0D5] relative overflow-hidden">
+              {/* Card header */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <div className="text-xs text-[#8A7A6A] uppercase tracking-wider mb-1">Conversion Dashboard</div>
+                  <div className="font-bold text-[#2A1A0E]">Iteration #7 — Live</div>
+                </div>
+                <div className="flex items-center gap-2 bg-[#F0EBE3] px-3 py-1.5 rounded-full">
+                  <span className="w-2 h-2 bg-green-500 rounded-full" style={{animation: 'pulse-dot 1.5s ease-in-out infinite'}} />
+                  <span className="text-xs font-semibold text-[#2A1A0E]">+34% CVR</span>
+                </div>
+              </div>
+
+              {/* Bar chart */}
+              <div className="flex items-end gap-2 h-36 mb-4">
+                {[
+                  { h: '35', label: 'W1', color: '#E8D5C8' },
+                  { h: '42', label: 'W2', color: '#E8D5C8' },
+                  { h: '38', label: 'W3', color: '#E8D5C8' },
+                  { h: '55', label: 'W4', color: '#C8401E' },
+                  { h: '68', label: 'W5', color: '#C8401E' },
+                  { h: '72', label: 'W6', color: '#C8401E' },
+                  { h: '85', label: 'W7', color: '#C8401E' },
+                ].map((bar, i) => (
+                  <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                    <div className="w-full rounded-t-sm bar-animate" style={{
+                      '--h': bar.h + '%',
+                      '--delay': (i * 0.1) + 's',
+                      background: bar.color,
+                      alignSelf: 'flex-end'
+                    } as React.CSSProperties} />
+                    <span className="text-[10px] text-[#8A7A6A]">{bar.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Funnel mini */}
+              <div className="bg-[#F7F3EE] rounded-xl p-4">
+                <div className="text-xs text-[#8A7A6A] mb-3 uppercase tracking-wider">Funnel — This Iteration</div>
+                <div className="space-y-2">
+                  {[
+                    { label: 'Visitors', val: '1,000', w: '100%', color: '#2A1A0E' },
+                    { label: 'Trials', val: '340', w: '34%', color: '#C8401E' },
+                    { label: 'Paid', val: '89', w: '8.9%', color: '#8B3015' },
+                  ].map((row, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-16 text-xs text-[#8A7A6A]">{row.label}</div>
+                      <div className="flex-1 h-2 bg-[#E8E0D5] rounded-full overflow-hidden">
+                        <div className="h-full rounded-full transition-all duration-1000" style={{width: row.w, background: row.color}} />
+                      </div>
+                      <div className="w-10 text-xs font-bold text-[#2A1A0E] text-right">{row.val}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Diagonal stripe accent */}
+              <div className="absolute top-0 right-0 w-24 h-24 diagonal-stripe rounded-tr-2xl" />
+            </div>
+
+            {/* Floating badge */}
+            <div className="absolute -bottom-4 -left-4 bg-[#2A1A0E] text-white rounded-xl px-4 py-3 shadow-xl">
+              <div className="text-xs text-[#8A7A6A] mb-0.5">Next.js + Vercel</div>
+              <div className="text-sm font-bold">Ships in minutes</div>
+            </div>
+
+            {/* Floating tag */}
+            <div className="absolute -top-4 -right-4 bg-[#C8401E] text-white rounded-full px-4 py-2 text-xs font-bold shadow-lg">
+              SaaS-specialized
+            </div>
           </div>
         </div>
       </section>
 
-      {/* GETTING STARTED SECTION */}
-      <section className="relative z-10 px-6 md:px-12 py-16 md:py-24 border-t border-[#1E1E24]">
-        <div className="max-w-5xl mx-auto">
-          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold tracking-[0.2em] uppercase text-[#E8291C] mb-4">How it works</p>
-          <h2 className="font-[family-name:var(--font-bebas)] text-[#F5F5F0] mb-12 leading-none tracking-wide" style={{ fontSize: 'clamp(40px, 6vw, 72px)' }}>Getting Started</h2>
+      {/* MARQUEE STRIP */}
+      <div className="mt-20 bg-[#2A1A0E] py-4 overflow-hidden">
+        <div className="marquee-track">
+          {[...Array(2)].map((_, rep) => (
+            <div key={rep} className="flex gap-12 items-center">
+              {['Data-driven iteration', '✦', 'SaaS-specialized', '✦', 'Next.js production apps', '✦', 'Vercel deployable', '✦', 'Conversion-first design', '✦', 'A/B tested', '✦'].map((item, i) => (
+                <span key={i} className="text-sm font-semibold text-[#F7F3EE]/70 whitespace-nowrap">{item}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              {
-                num: '01',
-                icon: '⚡',
-                title: 'Launch in hours',
-                desc: 'Production-ready pages from day one. No waiting, no back-and-forth. Your page goes live before your competition blinks.',
-              },
-              {
-                num: '02',
-                icon: '📊',
-                title: 'Data-backed design',
-                desc: 'Every design decision backed by live conversion data. We track what works and double down — no guesswork, ever.',
-              },
-              {
-                num: '03',
-                icon: '🔁',
-                title: 'Continuous iteration',
-                desc: 'Results compound over time. Each iteration improves on the last, building a conversion machine that gets smarter.',
-              },
-            ].map((item) => (
-              <div
-                key={item.num}
-                className="bg-[#111114] border border-[#1E1E24] rounded-2xl p-6 md:p-8 group hover:border-[#E8291C]/30 transition-all duration-300"
-                style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.03)' }}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <span className="font-[family-name:var(--font-bebas)] text-5xl text-[#1E1E24] group-hover:text-[#E8291C]/20 transition-colors leading-none tracking-wide">{item.num}</span>
-                  <span className="text-2xl">{item.icon}</span>
+      {/* FEATURES SECTION */}
+      <section className="py-24 px-6 md:px-10 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="text-xs uppercase tracking-widest text-[#C8401E] font-bold mb-4">How it works</div>
+          <h2 className={`${abril.className} text-4xl md:text-5xl text-[#2A1A0E]`}>Pages that evolve.<br />Results that compound.</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              num: '01',
+              title: 'Data-driven iteration cycles',
+              desc: 'Conversion rates improve automatically through structured testing loops. Every click teaches the page how to convert better.',
+              icon: '⟳',
+              bg: '#2A1A0E',
+              text: '#F7F3EE',
+            },
+            {
+              num: '02',
+              title: 'SaaS-specialized design',
+              desc: 'Built for signups, trials, and activation flows. Every design decision is calibrated for SaaS conversion metrics.',
+              icon: '◈',
+              bg: '#C8401E',
+              text: '#F7F3EE',
+            },
+            {
+              num: '03',
+              title: 'Production-ready Next.js',
+              desc: 'Every page ships as a deployable Next.js app. Connect to Vercel and go live in minutes, not weeks.',
+              icon: '⬡',
+              bg: '#F0EBE3',
+              text: '#2A1A0E',
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className="hover-lift rounded-2xl p-8 relative overflow-hidden"
+              style={{background: card.bg, color: card.text}}
+            >
+              <div className="text-5xl mb-6 opacity-20 absolute top-6 right-6 font-bold">{card.num}</div>
+              <div className="text-3xl mb-4">{card.icon}</div>
+              <h3 className={`${abril.className} text-2xl mb-4 leading-tight`}>{card.title}</h3>
+              <p className="text-sm leading-relaxed opacity-80">{card.desc}</p>
+              {i === 0 && (
+                <div className="mt-6 flex items-center gap-2">
+                  <div className="h-1 flex-1 bg-[#C8401E] rounded-full" />
+                  <div className="h-1 flex-1 bg-[#C8401E]/40 rounded-full" />
+                  <div className="h-1 flex-1 bg-[#C8401E]/20 rounded-full" />
                 </div>
-                <h3 className="font-[family-name:var(--font-manrope)] font-bold text-[#F5F5F0] text-lg mb-3">{item.title}</h3>
-                <p className="font-[family-name:var(--font-manrope)] text-[#6B6B72] text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROCESS SECTION */}
+      <section className="py-20 px-6 md:px-10 bg-[#2A1A0E]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-[#C8401E] font-bold mb-6">The system</div>
+              <h2 className={`${abril.className} text-4xl md:text-5xl text-[#F7F3EE] mb-8 leading-tight`}>
+                Not a page.<br />A learning machine.
+              </h2>
+              <p className="text-[#8A7A6A] text-lg leading-relaxed mb-10">
+                Traditional agencies hand you a static page and walk away. We build systems that get smarter with every visitor — turning your traffic into a continuous feedback loop.
+              </p>
+              <a
+                href="https://muhibwaqar.com"
+                className="inline-block bg-[#C8401E] text-white font-bold text-base px-8 py-4 rounded-full hover:bg-[#A83318] transition-all duration-200 hover:scale-105"
+              >
+                Get started →
+              </a>
+            </div>
+
+            {/* Process steps */}
+            <div className="space-y-4">
+              {[
+                { step: '1', title: 'Ship', desc: 'Production-ready Next.js page deployed to Vercel', color: '#C8401E' },
+                { step: '2', title: 'Measure', desc: 'Real visitor data collected across every interaction', color: '#8B5E3C' },
+                { step: '3', title: 'Iterate', desc: 'Data-driven changes implemented in structured cycles', color: '#6B8A4A' },
+                { step: '4', title: 'Compound', desc: 'Each iteration builds on the last — results accelerate', color: '#4A6B8A' },
+              ].map((step, i) => (
+                <div key={i} className="flex items-start gap-4 bg-[#3A2A1E] rounded-xl p-5 hover-lift">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style={{background: step.color}}>
+                    {step.step}
+                  </div>
+                  <div>
+                    <div className={`${abril.className} text-xl text-[#F7F3EE] mb-1`}>{step.title}</div>
+                    <div className="text-sm text-[#8A7A6A]">{step.desc}</div>
+                  </div>
+                  <div className="ml-auto text-[#8A7A6A] text-xl">→</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA SECTION */}
-      <section className="relative z-10 px-6 md:px-12 py-16 md:py-24 border-t border-[#1E1E24]">
-        <div
-          className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-16 relative overflow-hidden"
-          style={{
-            background: '#111114',
-            border: '1px solid #1E1E24',
-            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04)',
-          }}
-        >
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              top: '-50%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '600px',
-              height: '400px',
-              background: 'radial-gradient(ellipse at center, rgba(232,41,28,0.12) 0%, transparent 70%)',
-              pointerEvents: 'none',
-            }}
-          />
-          <p className="font-[family-name:var(--font-manrope)] text-xs font-semibold tracking-[0.2em] uppercase text-[#E8291C] mb-4 relative z-10">Build smarter. Convert faster.</p>
-          <h2
-            className="font-[family-name:var(--font-bebas)] text-[#F5F5F0] mb-6 leading-none tracking-wide relative z-10"
-            style={{ fontSize: 'clamp(40px, 7vw, 80px)' }}
-          >
-            Ready to outperform<br />your competition?
-          </h2>
-          <p className="font-[family-name:var(--font-manrope)] text-[#6B6B72] text-base md:text-lg max-w-lg mx-auto mb-10 leading-relaxed relative z-10">
-            Join 22,000+ users who launch faster, iterate smarter, and convert better with muhibs busoness.
-          </p>
-          <a
-            href="https://whop.com"
-            className="relative z-10 inline-flex items-center gap-2 font-[family-name:var(--font-manrope)] font-semibold text-base bg-[#E8291C] hover:bg-[#c9221a] text-white px-8 py-4 rounded-xl transition-all duration-200 shadow-[0_0_30px_rgba(232,41,28,0.4)] hover:shadow-[0_0_40px_rgba(232,41,28,0.6)]"
-          >
-            Get started
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M8 3l5 5-5 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
+      <section className="py-24 px-6 md:px-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-[#C8401E] rounded-3xl p-12 md:p-16 relative overflow-hidden">
+            <div className="diagonal-stripe absolute inset-0 opacity-30" />
+            <div className="relative z-10">
+              <h2 className={`${abril.className} text-4xl md:text-6xl text-white mb-6 leading-tight`}>
+                Ready to build a page that learns?
+              </h2>
+              <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+                Join SaaS founders who've replaced static pages with living conversion systems.
+              </p>
+              <a
+                href="https://muhibwaqar.com"
+                className="inline-block bg-white text-[#C8401E] font-bold text-lg px-10 py-5 rounded-full hover:bg-[#F7F3EE] transition-all duration-200 hover:scale-105 shadow-2xl"
+              >
+                Get started →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="relative z-10 border-t border-[#1E1E24] px-6 md:px-12 py-8">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-sm bg-[#E8291C] flex items-center justify-center">
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7L6 11L12 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+      <footer className="border-t border-[#E8E0D5] py-10 px-6 md:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 bg-[#C8401E] rounded-sm flex items-center justify-center">
+              <span className="text-white font-bold text-xs">mw</span>
             </div>
-            <span className="font-[family-name:var(--font-manrope)] font-bold text-[#F5F5F0] text-sm">muhibs busoness</span>
+            <span className="font-semibold text-[#2A1A0E] text-sm">muhib waaqar</span>
           </div>
-          <div className="flex items-center gap-6">
-            {['How it works', 'Mission', 'Press', 'Brand', 'Privacy', 'Terms', 'Status'].map((item) => (
-              <span key={item} className="font-[family-name:var(--font-manrope)] text-xs text-[#6B6B72]">{item}</span>
-            ))}
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-lg bg-[#111114] border border-[#1E1E24] flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#6B6B72">
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-              </svg>
-            </div>
-            <div className="w-8 h-8 rounded-lg bg-[#111114] border border-[#1E1E24] flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B6B72" strokeWidth="2">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-5xl mx-auto mt-6 pt-6 border-t border-[#1E1E24]">
-          <p className="font-[family-name:var(--font-manrope)] text-xs text-[#6B6B72] text-center">
-            © 2024 muhibs busoness. All rights reserved.
+          <p className="text-sm text-[#8A7A6A] text-center">
+            Pages that evolve. Results that compound.
+          </p>
+          <p className="text-xs text-[#8A7A6A]">
+            © 2024 muhib waaqar. All rights reserved.
           </p>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
