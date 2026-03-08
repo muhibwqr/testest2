@@ -1,271 +1,264 @@
 "use client";
 
-import { Archivo_Black, DM_Sans } from "next/font/google";
+import { Playfair_Display, DM_Sans } from 'next/font/google';
 
-const archivoBlack = Archivo_Black({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-archivo",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-dm",
-});
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700', '900'], style: ['normal', 'italic'] });
+const dmSans = DM_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
 
 export default function Page() {
   return (
-    <main
-      className={`${archivoBlack.variable} ${dmSans.variable} min-h-screen bg-[#FFFFFF] text-[#0D0D0D]`}
-      style={{ fontFamily: "var(--font-dm), sans-serif" }}
-    >
-      {/* Top black rule */}
-      <div className="w-full h-[3px] bg-[#0D0D0D]" />
+    <div className={`${dmSans.className} min-h-screen`} style={{ backgroundColor: '#FAFAF8', color: '#0F0F0E' }}>
+      <style>{`
+        .playfair { font-family: ${playfair.style.fontFamily}; }
+        .ink { color: #0F0F0E; }
+        .accent { color: #D4240F; }
+        .muted { color: #8A8A82; }
+        .surface { background-color: #F0EFEB; }
+        .border-col { border-color: #E2E1DC; }
+        .funnel-bar { transition: width 0.6s ease; }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(24px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.7s ease forwards; }
+        .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+        .fade-up-2 { animation-delay: 0.25s; opacity: 0; }
+        .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
+        .fade-up-4 { animation-delay: 0.55s; opacity: 0; }
+        .small-caps { font-variant: small-caps; letter-spacing: 0.12em; }
+        .rule { border-color: #E2E1DC; }
+        .feature-num { font-size: 0.65rem; letter-spacing: 0.18em; }
+        .cta-pill {
+          border: 1.5px solid #0F0F0E;
+          border-radius: 999px;
+          padding: 8px 22px;
+          font-size: 0.82rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          transition: background 0.2s, color 0.2s;
+          background: transparent;
+          color: #0F0F0E;
+        }
+        .cta-pill:hover {
+          background: #0F0F0E;
+          color: #FAFAF8;
+        }
+        .cta-pill-filled {
+          border-radius: 999px;
+          padding: 14px 36px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          transition: opacity 0.2s;
+          background: #D4240F;
+          color: #FAFAF8;
+          border: none;
+        }
+        .cta-pill-filled:hover { opacity: 0.88; }
+        .funnel-card {
+          background: #FFFFFF;
+          border: 1.5px solid #E2E1DC;
+          border-radius: 16px;
+          padding: 32px;
+          box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+        }
+        .stat-card {
+          background: #FFFFFF;
+          border: 1.5px solid #E2E1DC;
+          border-radius: 12px;
+          padding: 28px 24px;
+        }
+        .marquee-track {
+          display: flex;
+          gap: 48px;
+          animation: marquee 18s linear infinite;
+          white-space: nowrap;
+        }
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
 
-      {/* Nav */}
-      <nav className="w-full border-b border-[#E0E0DC] px-6 md:px-12 py-4 flex items-center justify-between">
-        <span
-          className="text-[#0D0D0D] text-lg tracking-tight"
-          style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-        >
-          muhibs busoness
-        </span>
-        <div className="flex items-center gap-6">
-          <span className="hidden md:block text-sm text-[#5A5A5A] cursor-default">For Enterprise</span>
-          <span className="hidden md:block text-sm text-[#5A5A5A] cursor-default">API</span>
-          <span className="hidden md:block text-sm text-[#5A5A5A] cursor-default">Sign In</span>
-          <a
-            href="https://whop.com"
-            className="bg-[#0D0D0D] text-white text-sm px-5 py-2.5 font-medium transition-colors duration-200 hover:bg-[#D42B1E]"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          >
+      {/* NAV */}
+      <nav style={{ borderBottom: '1px solid #E2E1DC', backgroundColor: '#FAFAF8' }} className="sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 flex items-center justify-between" style={{ height: '60px' }}>
+          <span className={`small-caps text-sm font-medium tracking-widest ink ${dmSans.className}`} style={{ fontSize: '0.78rem' }}>
+            muhib waaqar
+          </span>
+          <a href="https://muhibwaqar.com" className="cta-pill" style={{ fontFamily: dmSans.style.fontFamily }}>
             Get started
           </a>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="flex flex-col items-center text-center px-6 md:px-12 pt-16 md:pt-24 pb-12 md:pb-20">
-        {/* Toggle pill */}
-        <div className="flex items-center border border-[#E0E0DC] rounded-full overflow-hidden mb-10 md:mb-14">
-          <span
-            className="px-5 py-2 text-sm bg-[#0D0D0D] text-white"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          >
-            Launch
-          </span>
-          <span
-            className="px-5 py-2 text-sm text-[#5A5A5A]"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          >
-            Discover
-          </span>
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="text-[clamp(52px,10vw,108px)] leading-[0.92] tracking-tight text-[#0D0D0D] max-w-4xl mb-6 md:mb-8"
-          style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-        >
-          Where Data{" "}
-          <span
-            className="relative inline-block"
-            style={{
-              textDecoration: "underline",
-              textDecorationColor: "#D42B1E",
-              textDecorationThickness: "4px",
-              textUnderlineOffset: "6px",
-            }}
-          >
-            Meets
-          </span>{" "}
-          Design.
-        </h1>
-
-        {/* Subhead */}
-        <p
-          className="text-[#5A5A5A] text-base md:text-lg max-w-xl leading-relaxed mb-10 md:mb-12"
-          style={{ fontFamily: "var(--font-dm), sans-serif", fontWeight: 400 }}
-        >
-          Landing pages that learn from every click — built fast, refined by real performance data, and deployed before your competition catches up.
-        </p>
-
-        {/* Prompt / CTA box */}
-        <div
-          className="w-full max-w-2xl border border-[#E0E0DC] bg-[#F4F4F2] flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-3"
-          style={{ borderRadius: "2px" }}
-        >
-          <input
-            type="text"
-            placeholder="Describe your landing page..."
-            className="flex-1 bg-transparent text-[#0D0D0D] placeholder-[#5A5A5A] text-sm px-3 py-2 outline-none"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          />
-          <a
-            href="https://whop.com"
-            className="bg-[#0D0D0D] text-white text-sm font-medium px-6 py-3 whitespace-nowrap transition-colors duration-200 hover:bg-[#D42B1E] text-center"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          >
-            Get started
-          </a>
-        </div>
-
-        {/* Stats bar */}
-        <div className="mt-12 md:mt-16 w-full max-w-2xl">
-          <div className="w-full h-px bg-[#E0E0DC] mb-6" />
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:divide-x sm:divide-[#E0E0DC]">
-            <div className="sm:px-8 text-center">
-              <span
-                className="text-2xl md:text-3xl text-[#0D0D0D] block"
-                style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-              >
-                $2.8M+
-              </span>
-              <span className="text-xs text-[#5A5A5A] uppercase tracking-widest mt-1 block">revenue generated</span>
+      {/* HERO */}
+      <section className="max-w-6xl mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-20">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
+          {/* Left: Headline + Sub */}
+          <div className="flex-1 fade-up fade-up-1">
+            <div className="mb-4 flex items-center gap-2">
+              <span style={{ width: 28, height: 1.5, backgroundColor: '#D4240F', display: 'inline-block' }}></span>
+              <span className="muted text-xs tracking-widest uppercase" style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}>Data-Driven Landing Pages</span>
             </div>
-            <div className="sm:px-8 text-center">
-              <span
-                className="text-2xl md:text-3xl text-[#0D0D0D] block"
-                style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-              >
-                22,000+
-              </span>
-              <span className="text-xs text-[#5A5A5A] uppercase tracking-widest mt-1 block">users served</span>
-            </div>
-            <div className="sm:px-8 text-center">
-              <span
-                className="text-2xl md:text-3xl text-[#0D0D0D] block"
-                style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-              >
-                2,400+
-              </span>
-              <span className="text-xs text-[#5A5A5A] uppercase tracking-widest mt-1 block">pages launched</span>
-            </div>
-          </div>
-          <div className="w-full h-px bg-[#E0E0DC] mt-6" />
-        </div>
-      </section>
-
-      {/* Getting started section */}
-      <section className="px-6 md:px-12 py-16 md:py-24 bg-[#F4F4F2]">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
-            <h2
-              className="text-[clamp(32px,5vw,56px)] leading-tight text-[#0D0D0D] max-w-lg"
-              style={{ fontFamily: "var(--font-archivo), sans-serif" }}
+            <h1
+              className={`playfair font-black italic leading-none mb-6`}
+              style={{ fontSize: 'clamp(42px, 7vw, 80px)', color: '#0F0F0E', maxWidth: '640px' }}
             >
-              Getting started
-            </h2>
-            <p className="text-[#5A5A5A] text-sm max-w-xs" style={{ fontFamily: "var(--font-dm), sans-serif" }}>
-              Three steps from idea to live, converting page.
+              Landing Pages That Learn From Every Click
+            </h1>
+            <p className="mb-8 leading-relaxed" style={{ color: '#8A8A82', fontSize: '1.05rem', maxWidth: '480px', fontWeight: 400 }}>
+              Most landing pages are set-and-forget. Ours are living systems — continuously tested, refined by real data, and rebuilt to convert better every iteration.
             </p>
+            <a href="https://muhibwaqar.com" className="cta-pill-filled inline-block" style={{ fontFamily: dmSans.style.fontFamily }}>
+              Get started
+            </a>
+            <p className="mt-4 text-xs" style={{ color: '#8A8A82' }}>Pages that evolve. Results that compound.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#E0E0DC]">
-            {[
-              {
-                num: "01",
-                title: "Launch in hours",
-                desc: "Production-ready pages from day one. No waiting, no bottlenecks — your page is live before the competition blinks.",
-                icon: "⚡",
-              },
-              {
-                num: "02",
-                title: "Data-backed design",
-                desc: "Every design decision is backed by live conversion data. We don't guess — we measure, then refine.",
-                icon: "📊",
-              },
-              {
-                num: "03",
-                title: "Continuous iteration",
-                desc: "Results compound over time. Each iteration builds on the last, turning good pages into great ones.",
-                icon: "🔁",
-              },
-            ].map((item) => (
-              <div key={item.num} className="bg-[#FFFFFF] p-8 md:p-10">
-                <div className="flex items-start justify-between mb-6">
-                  <span
-                    className="text-[#D42B1E] text-sm font-medium"
-                    style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-                  >
-                    {item.num}
-                  </span>
-                  <span className="text-2xl">{item.icon}</span>
-                </div>
-                <h3
-                  className="text-xl md:text-2xl text-[#0D0D0D] mb-3"
-                  style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-[#5A5A5A] text-sm leading-relaxed" style={{ fontFamily: "var(--font-dm), sans-serif" }}>
-                  {item.desc}
-                </p>
+          {/* Right: Funnel Card */}
+          <div className="mt-12 lg:mt-0 lg:w-80 xl:w-96 flex-shrink-0 fade-up fade-up-2">
+            <div className="funnel-card">
+              <div className="mb-5 flex items-center justify-between">
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#8A8A82', fontSize: '0.65rem', letterSpacing: '0.18em' }}>Conversion Funnel</span>
+                <span className="text-xs font-medium" style={{ color: '#D4240F', fontSize: '0.72rem' }}>↑ 8.9% CVR</span>
               </div>
-            ))}
+
+              {/* Funnel rows */}
+              {[
+                { label: 'Visitors', value: '1,000', pct: 100, color: '#0F0F0E' },
+                { label: 'Trials started', value: '340', pct: 34, color: '#D4240F' },
+                { label: 'Paid conversions', value: '89', pct: 8.9, color: '#D4240F' },
+              ].map((row, i) => (
+                <div key={i} className="mb-4 last:mb-0">
+                  <div className="flex justify-between items-baseline mb-1.5">
+                    <span className="text-xs" style={{ color: '#8A8A82', fontSize: '0.75rem' }}>{row.label}</span>
+                    <span className={`playfair font-bold`} style={{ fontSize: '1.15rem', color: row.color }}>{row.value}</span>
+                  </div>
+                  <div style={{ height: '3px', backgroundColor: '#F0EFEB', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div
+                      className="funnel-bar"
+                      style={{ height: '100%', width: `${row.pct}%`, backgroundColor: i === 0 ? '#0F0F0E' : '#D4240F', borderRadius: '2px' }}
+                    />
+                  </div>
+                </div>
+              ))}
+
+              <div style={{ borderTop: '1px solid #E2E1DC', marginTop: '20px', paddingTop: '16px' }}>
+                <div className="flex justify-between">
+                  <div>
+                    <div className="text-xs" style={{ color: '#8A8A82', fontSize: '0.68rem', marginBottom: '2px' }}>Before iteration</div>
+                    <div className={`playfair font-bold`} style={{ fontSize: '1.3rem', color: '#8A8A82' }}>3.1%</div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div className="text-xs" style={{ color: '#8A8A82', fontSize: '0.68rem', marginBottom: '2px' }}>After iteration</div>
+                    <div className={`playfair font-bold`} style={{ fontSize: '1.3rem', color: '#D4240F' }}>8.9%</div>
+                  </div>
+                </div>
+                <div style={{ marginTop: '10px', fontSize: '0.68rem', color: '#8A8A82', textAlign: 'center' }}>+187% lift over 6 iteration cycles</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="px-6 md:px-12 py-16 md:py-24 bg-[#0D0D0D]">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h2
-              className="text-[clamp(28px,4vw,52px)] leading-tight text-white mb-3"
-              style={{ fontFamily: "var(--font-archivo), sans-serif" }}
+      {/* THIN RULE */}
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <hr style={{ borderColor: '#E2E1DC', borderTopWidth: '1px' }} />
+      </div>
+
+      {/* STATS STRIP */}
+      <section className="max-w-6xl mx-auto px-6 md:px-10 py-12 fade-up fade-up-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            { num: '2,400+', label: 'Iteration cycles run', sub: 'across all active pages' },
+            { num: '+187%', label: 'Average conversion lift', sub: 'from baseline to peak' },
+            { num: '48hrs', label: 'First page live', sub: 'from brief to deployed' },
+          ].map((s, i) => (
+            <div key={i} className="stat-card">
+              <div className={`playfair font-black`} style={{ fontSize: '2.4rem', color: '#0F0F0E', lineHeight: 1 }}>{s.num}</div>
+              <div className="mt-2 font-medium" style={{ fontSize: '0.85rem', color: '#0F0F0E' }}>{s.label}</div>
+              <div className="mt-0.5" style={{ fontSize: '0.75rem', color: '#8A8A82' }}>{s.sub}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* THIN RULE */}
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <hr style={{ borderColor: '#E2E1DC', borderTopWidth: '1px' }} />
+      </div>
+
+      {/* FEATURES — Editorial numbered list */}
+      <section className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-20 fade-up fade-up-4">
+        <div className="mb-10">
+          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#8A8A82', fontSize: '0.68rem', letterSpacing: '0.2em' }}>What we do</span>
+        </div>
+        <div className="space-y-0">
+          {[
+            {
+              num: '01',
+              title: 'Data-driven iteration cycles',
+              body: 'Conversion rates improve automatically through structured A/B testing and real behavioral data — not guesswork. Every cycle compounds on the last.',
+            },
+            {
+              num: '02',
+              title: 'SaaS-specialized design',
+              body: 'Built specifically for signups, trials, and activation flows. We understand the SaaS funnel deeply — from first impression to paid conversion.',
+            },
+            {
+              num: '03',
+              title: 'Production-ready Next.js delivery',
+              body: 'Every page ships as a deployable Next.js app. Connect to Vercel in minutes — not weeks. You own the code, the data, and the results.',
+            },
+          ].map((f, i) => (
+            <div
+              key={i}
+              className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10 py-8"
+              style={{ borderBottom: i < 2 ? '1px solid #E2E1DC' : 'none' }}
             >
-              Build smarter.
-              <br />
-              <span
-                style={{
-                  textDecoration: "underline",
-                  textDecorationColor: "#D42B1E",
-                  textDecorationThickness: "3px",
-                  textUnderlineOffset: "5px",
-                }}
-              >
-                Convert faster.
-              </span>
-            </h2>
-            <p className="text-[#5A5A5A] text-sm max-w-sm" style={{ fontFamily: "var(--font-dm), sans-serif" }}>
-              Join 22,000+ users who trust muhibs busoness to turn data into design that converts.
-            </p>
-          </div>
-          <a
-            href="https://whop.com"
-            className="flex-shrink-0 bg-[#D42B1E] text-white text-base font-medium px-10 py-4 transition-colors duration-200 hover:bg-white hover:text-[#0D0D0D]"
-            style={{ fontFamily: "var(--font-dm), sans-serif" }}
-          >
-            Get started
-          </a>
+              <div className="flex-shrink-0">
+                <span className="font-semibold" style={{ fontSize: '0.65rem', color: '#D4240F', letterSpacing: '0.2em', fontVariant: 'small-caps' }}>{f.num}</span>
+              </div>
+              <div className="flex-1">
+                <h3 className={`playfair font-bold mb-2`} style={{ fontSize: '1.35rem', color: '#0F0F0E' }}>{f.title}</h3>
+                <p style={{ color: '#8A8A82', fontSize: '0.92rem', lineHeight: 1.7, maxWidth: '520px' }}>{f.body}</p>
+              </div>
+              <div className="hidden sm:flex items-center" style={{ color: '#E2E1DC', fontSize: '1.5rem' }}>→</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[#E0E0DC] px-6 md:px-12 py-8">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <span
-            className="text-[#0D0D0D] text-sm"
-            style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-          >
-            muhibs busoness
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#5A5A5A]" style={{ fontFamily: "var(--font-dm), sans-serif" }}>
-            <span>How it works</span>
-            <span>Mission</span>
-            <span>Press</span>
-            <span>Brand</span>
-            <span>Privacy</span>
-            <span>Terms</span>
-            <span>Status</span>
+      {/* THIN RULE */}
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <hr style={{ borderColor: '#E2E1DC', borderTopWidth: '1px' }} />
+      </div>
+
+      {/* CTA SECTION */}
+      <section className="max-w-6xl mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+          <div>
+            <h2 className={`playfair font-black italic`} style={{ fontSize: 'clamp(32px, 5vw, 58px)', color: '#0F0F0E', lineHeight: 1.1, maxWidth: '520px' }}>
+              Ready to build a page that gets smarter?
+            </h2>
           </div>
-          <span className="text-xs text-[#5A5A5A]" style={{ fontFamily: "var(--font-dm), sans-serif" }}>
-            © 2024 muhibs busoness
-          </span>
+          <div className="flex-shrink-0">
+            <a href="https://muhibwaqar.com" className="cta-pill-filled inline-block" style={{ fontFamily: dmSans.style.fontFamily, fontSize: '1rem', padding: '16px 44px' }}>
+              Get started
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{ borderTop: '1px solid #E2E1DC', backgroundColor: '#F0EFEB' }}>
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span className={`small-caps text-xs font-medium tracking-widest`} style={{ color: '#8A8A82', fontSize: '0.72rem' }}>muhib waaqar</span>
+          <span style={{ color: '#8A8A82', fontSize: '0.75rem' }}>Pages that evolve. Results that compound.</span>
+          <span style={{ color: '#8A8A82', fontSize: '0.72rem' }}>© 2025 muhib waaqar</span>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
